@@ -3,8 +3,6 @@
 
 KillTime = 30 -- seconds after loiter initiated for termination
 
---Test 5
-
 
 Mode_RTL = 11 -- Mode Number associated with RTL
 
