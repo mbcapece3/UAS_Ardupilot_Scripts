@@ -27,4 +27,4 @@ Competition Failsafe script for AUVSI SUAS
 
 -Scripts must be located in a folder called 'scripts'
 
-- eg. sys\scripts\COMP_FS.lua
+- eg. F:\APM\scripts\COMP_FS.lua
