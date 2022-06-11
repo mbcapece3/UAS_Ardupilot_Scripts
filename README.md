@@ -25,6 +25,6 @@ Competition Failsafe script for AUVSI SUAS
 
 ## For Flight Contoller:
 
--Scripts must be located in a folder called 'scripts'
+-Scripts must be located in a folder on the SD card called 'scripts'
 
 - eg. F:\APM\scripts\COMP_FS.lua
