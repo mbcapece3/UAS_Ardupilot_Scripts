@@ -2,7 +2,7 @@
 -- Will result in flight termination in the event of communications loss
 
 KillTime = 30 -- seconds after loiter initiated for termination
-
+--Test
 
 Mode_RTL = 11 -- Mode Number associated with RTL
 
