@@ -3,6 +3,9 @@
 
 KillTime = 30 -- seconds after loiter initiated for termination
 
+--Test 3
+
+
 Mode_RTL = 11 -- Mode Number associated with RTL
 
 AFS_Enabled = param:get('AFS_ENABLE')  --Is AFS Enabled? 1 or 0
