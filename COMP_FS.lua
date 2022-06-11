@@ -1,7 +1,7 @@
 -- Penn State UAS Comms Loss Failsafe for AUVSI SUAS Competition
 -- Will result in flight termination in the event of communications loss
 
-KillTime = 30 -- seconds after loiter initiated for termination
+KillTime = 30 -- seconds after RTL initiated for termination
 
 
 Mode_RTL = 11 -- Mode Number associated with RTL
