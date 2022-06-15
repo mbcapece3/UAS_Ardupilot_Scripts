@@ -2,7 +2,7 @@
 
 Competition Failsafe script for AUVSI SUAS
 
-Currently works, but will cause flight termination if RTL initiated from ground station
+Very much a work in progress. Script runs successfully, but will cause flight termination if RTL initiated from ground station!
 
 
 
