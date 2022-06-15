@@ -1,28 +1,40 @@
 -- Penn State UAS Comms Loss Failsafe for AUVSI SUAS Competition
 -- Will result in flight termination in the event of communications loss
 
+-- Use with Standard RC Failsafe, Advanced RC Failsafe, and Standard GCS Failsafe activated
+-- Note: UPON REAQUIRING GCS SIGNAL, YOU MUST MANUALLY SWITCH INTO AUTO TO AVOID TERMINATION!!!
+
+
 KillTime = 30 -- seconds after RTL initiated for termination
 
 
-Mode_RTL = 11 -- Mode Number associated with RTL
+Mode_RTL = 11 
 
 AFS_Enabled = param:get('AFS_ENABLE')  --Is AFS Enabled? 1 or 0
-CH_Throttle = param:get('RCMAP_THROTTLE')  --Throttle Channel Number
-Throttle_FS_PWM = param:get('THR_FS_VALUE') --PWM Value that throttle drops below with RC loss
+CH_FLTMODE = param:get('FLTMODE_CH') 
+FLTMODE_MIN_PWM = param:get('RC8_MIN') --Minimum PWM Value of flight mode chanel. MAKE SURE THIS IS SET FOR RTL!!!!!!!!! 
 
 FailTime = 0 -- initialize time of failure
 
-function checkGCS()
+function checkGCS() 
 
     if arming:is_armed() and AFS_Enabled then
-        local modeNum = vehicle:get_mode()
 
-        if modeNum == Mode_RTL and FailTime == 0 then
-            FailTime = millis():tofloat() * .001
+        local modeNum = vehicle:get_mode()
+        CURR_FLTMODE_PWM  = rc:get_pwm(CH_FLTMODE)
+
+        if modeNum == Mode_RTL and CURR_FLTMODE_PWM ~= FLTMODE_MIN_PWM then
+            IS_FAIL = true
+        else
+            IS_FAIL = false
         end
 
-        if modeNum == Mode_RTL then
-            RTLTime =  millis():tofloat() * .001 - FailTime
+        if IS_FAIL and FailTime == 0 then
+            FailTime = millis():tofloat() * .001  --Initial time of failure
+        end
+
+        if IS_FAIL then
+            RTLTime =  millis():tofloat() * .001 - FailTime  --Checks time since failure
             gcs:send_text(1,"GCS LOSS: " .. tostring(RTLTime))
 
             if RTLTime >= KillTime then
@@ -43,11 +55,3 @@ function checkGCS()
 end
 
 return checkGCS, 1000
-
---Add some sort of redundancy check
-    -- Currently, any RTL will cause GCS termination to occur after delay. Also termination will occur on the ground, but this could actually be good for testing
---AFS must be enabled for termination to occur, but this specifically uses standard GCS Failsafes. Should I change to REMRSSI and Heartbeat?
-
---Ideas
-    --Use RTL in conjunction with FLTMODE_CH not being RTL
-    --Use RTL in conjunction with RC Loss (Throttle failsafe), but this is no different from regular RC failsafe unless i disable rc failsafe and only do them together in this script but thats a bit sketchy
