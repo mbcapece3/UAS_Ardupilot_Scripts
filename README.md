@@ -1,4 +1,4 @@
-# UAS_Ardupilot_Scripts
+# UAS_Ardupilot_Scripts (Work In Progress)
 
 Competition Failsafe script for AUVSI SUAS
 
