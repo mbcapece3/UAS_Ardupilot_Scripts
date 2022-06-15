@@ -1,6 +1,7 @@
 # UAS_Ardupilot_Scripts (Work In Progress)
 
 Competition Failsafe script for AUVSI SUAS
+Currently works, but will cause flight termination if RTL initiated from ground station
 
 
 
